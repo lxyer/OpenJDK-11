@@ -42,6 +42,9 @@
 
 6. **欢迎反馈好的想法、建议、意见。**
 
+## 脚注
+项目提交信息中的emoji取自[gitmoji](https://gitmoji.carloscuesta.me/)。
+
 ## 附录
 
 #### 测试文件简介
