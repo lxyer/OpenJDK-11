@@ -50,3 +50,6 @@
 * VoidTest - java.lang.Void
   * `VoidTest01` Void在反射中的使用
   * `VoidTest02` Void在泛型中的使用
+* StringCharacterIteratorTest - java.text.StringCharacterIterator
+  * `StringCharacterIteratorTest01` 双向遍历String
+
