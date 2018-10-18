@@ -61,3 +61,5 @@
   * `BreakIteratorTest02` 分词器对单词的分割
   * `BreakIteratorTest03` 分词器对行的分割
   * `BreakIteratorTest04` 分词器对句子的分割
+* ByteOrderTest - 当前系统字节顺序
+  * `ByteOrderTest01` 查看当前系统存储数据用的是大端法还是小端法
