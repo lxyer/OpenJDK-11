@@ -56,4 +56,5 @@
   * `VoidTest02` Void在泛型中的使用
 * StringCharacterIteratorTest - java.text.StringCharacterIterator
   * `StringCharacterIteratorTest01` 双向遍历String
-
+* BreakIteratorTest - 分词器对字符、单词、行、语句的分割
+  * `BreakIteratorTest01` 分词器对字符(Unicode符号)的分割
