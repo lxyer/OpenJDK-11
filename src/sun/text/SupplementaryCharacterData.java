@@ -29,13 +29,14 @@ package sun.text;
  * SupplementaryCharacterData is an SMI-private class which was written for
  * RuleBasedBreakIterator and BreakDictionary.
  */
+// 存放从BreakIterator这类分词器使用的规则文件中提取的Unicode增补字符集类别信息。
 public final class SupplementaryCharacterData implements Cloneable {
-
+    
     /**
      * A token used as a character-category value to identify ignore characters
      */
     private static final byte IGNORE = -1;
-
+    
     /**
      * An array for supplementary characters and values.
      * Lower one byte is used to keep a byte-value.
@@ -50,37 +51,34 @@ public final class SupplementaryCharacterData implements Cloneable {
      * <code>0x23</code>. And, <code>getValue(0x10003)</code> returns the value.
      */
     private int[] dataTable;
-
-
+    
     /**
      * Creates a new SupplementaryCharacterData object with the given table.
      */
     public SupplementaryCharacterData(int[] table) {
         dataTable = table;
     }
-
+    
     /**
      * Returns a corresponding value for the given supplementary code-point.
      */
     public int getValue(int index) {
         // Index should be a valid supplementary character.
-        assert index >= Character.MIN_SUPPLEMENTARY_CODE_POINT &&
-               index <= Character.MAX_CODE_POINT :
-               "Invalid code point:" + Integer.toHexString(index);
-
+        assert index >= Character.MIN_SUPPLEMENTARY_CODE_POINT && index <= Character.MAX_CODE_POINT : "Invalid code point:" + Integer.toHexString(index);
+        
         int i = 0;
         int j = dataTable.length - 1;
         int k;
-
-        for (;;) {
+        
+        for(; ; ) {
             k = (i + j) / 2;
-
+            
             int start = dataTable[k] >> 8;
-            int end   = dataTable[k+1] >> 8;
-
-            if (index < start) {
+            int end = dataTable[k + 1] >> 8;
+            
+            if(index < start) {
                 j = k;
-            } else if (index > (end-1)) {
+            } else if(index > (end - 1)) {
                 i = k;
             } else {
                 int v = dataTable[k] & 0xFF;
@@ -88,12 +86,11 @@ public final class SupplementaryCharacterData implements Cloneable {
             }
         }
     }
-
+    
     /**
      * Returns the data array.
      */
     public int[] getArray() {
         return dataTable;
     }
-
 }
