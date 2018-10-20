@@ -63,3 +63,5 @@
   * `BreakIteratorTest04` 分词器对句子的分割
 * ByteOrderTest - 当前系统字节顺序
   * `ByteOrderTest01` 查看当前系统存储数据用的是大端法还是小端法
+* UnsafeTest - 测试Unsafe类常用操作，注意设置JDK>=8或OpenJDK>=9
+  * `UnsafeTest00` 获取Unsafe实例，并借助Unsafe创建其他类的对象
