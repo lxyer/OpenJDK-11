@@ -65,3 +65,4 @@
   * `ByteOrderTest01` 查看当前系统存储数据用的是大端法还是小端法
 * UnsafeTest - 测试Unsafe类常用操作，注意设置JDK>=8或OpenJDK>=9
   * `UnsafeTest00` 获取Unsafe实例，并借助Unsafe创建其他类的对象
+  * `UnsafeTest01` 获取字段地址，获取字段地址处的值，为某地址处的字段赋值
