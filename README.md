@@ -69,3 +69,5 @@
   * `UnsafeTest02` 对JVM内存中某对象的数组字段/变量直接操作
   * `UnsafeTest03` 本地内存操作
   * `UnsafeTest04` 利用Unsafe#objectFieldOffse方法获取某个对象的近似大小
+* ReferenceTest - 软引用、弱引用、虚引用测试
+  * `ReferenceTest01` 软引用SoftReference回收测试
