@@ -71,3 +71,5 @@
   * `UnsafeTest04` 利用Unsafe#objectFieldOffse方法获取某个对象的近似大小
 * ReferenceTest - 软引用、弱引用、虚引用测试
   * `ReferenceTest01` 软引用SoftReference回收测试
+  * `ReferenceTest02` 弱引用WeakReference回收测试
+  * `ReferenceTest03` 虚引用PhantomReference回收测试
