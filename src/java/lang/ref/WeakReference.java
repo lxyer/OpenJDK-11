@@ -41,12 +41,17 @@ package java.lang.ref;
  * later time it will enqueue those newly-cleared weak references that are
  * registered with reference queues.
  *
- * @author   Mark Reinhold
- * @since    1.2
+ * @author Mark Reinhold
+ * @since 1.2
  */
-
+/*
+ * 弱引用(Weak Reference)：
+ * 当一个对象只剩弱引用时，运行GC后会回收其引用。
+ * 它可以用于解决非静态内部类的内存泄露问题（定义一个静态内部类，并让它持有外部类的弱引用）
+ * 还可以用于实现缓存，比如WeakHashMap。
+ */
 public class WeakReference<T> extends Reference<T> {
-
+    
     /**
      * Creates a new weak reference that refers to the given object.  The new
      * reference is not registered with any queue.
@@ -56,17 +61,17 @@ public class WeakReference<T> extends Reference<T> {
     public WeakReference(T referent) {
         super(referent);
     }
-
+    
     /**
      * Creates a new weak reference that refers to the given object and is
      * registered with the given queue.
      *
      * @param referent object the new weak reference will refer to
-     * @param q the queue with which the reference is to be registered,
-     *          or {@code null} if registration is not required
+     * @param q        the queue with which the reference is to be registered,
+     *                 or {@code null} if registration is not required
      */
     public WeakReference(T referent, ReferenceQueue<? super T> q) {
         super(referent, q);
     }
-
+    
 }
