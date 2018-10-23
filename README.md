@@ -73,3 +73,5 @@
   * `ReferenceTest01` 软引用SoftReference回收测试
   * `ReferenceTest02` 弱引用WeakReference回收测试
   * `ReferenceTest03` 虚引用PhantomReference回收测试
+* CleanerTest - 清洁器测试
+  * `CleanerTest01` 创建Cleaner，注册追踪的对象和回调动作
