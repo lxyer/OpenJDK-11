@@ -37,15 +37,25 @@ package java.util.function;
  * @see Function
  * @since 1.8
  */
+/*
+ * 函数式接口：UnaryOperator<T>
+ *
+ * 一元操作，继承了Function<T, T>
+ *
+ * 参数：T
+ * 返回：T
+ */
 @FunctionalInterface
 public interface UnaryOperator<T> extends Function<T, T> {
-
+    
     /**
      * Returns a unary operator that always returns its input argument.
      *
      * @param <T> the type of the input and output of the operator
+     *
      * @return a unary operator that always returns its input argument
      */
+    // 标识转换（即自身到自身的转换）
     static <T> UnaryOperator<T> identity() {
         return t -> t;
     }
