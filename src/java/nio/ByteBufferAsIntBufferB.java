@@ -158,13 +158,13 @@ class ByteBufferAsIntBufferB extends IntBuffer {
         return ByteOrder.BIG_ENDIAN;
     }
     
-    protected long byteOffset(long i) {
-        return (i << 2) + address;
-    }
-    
     /*▲ 字节顺序 ████████████████████████████████████████████████████████████████████████████████┛ */
     
     
+    
+    protected long byteOffset(long i) {
+        return (i << 2) + address;
+    }
     
     @Override
     Object base() {
