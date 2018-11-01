@@ -96,14 +96,14 @@ import java.util.List;
  */
 
 /*
- * 用作自然排序接口，需要实现内部的compareTo方法。
+ * 比较器，用作自然排序接口，需要实现内部的compareTo方法。
  *
- * 一个类实现了Comparable接口，就意味着“该类本身支持排序”，它可以直接通过Arrays.sort() 或 Collections.sort()进行排序。
+ * 区别于Comparator，这是一个内部比较器，即比较方法往往实现在对象内部。
  *
- * 与Comparator的区别在于，Comparator是一个比较器接口。一个类实现了Comparator接口，那么它就是一个“比较器”。其它的类，可以根据该比较器去排序。
+ * 一个类实现了Comparable接口，就意味着“该类本身支持排序”，它可以直接通过Arrays.sort()或Collections.sort()进行排序。
  *
- * 综上，Comparable是内部比较器，而Comparator是外部比较器。
- * 一个类本身实现了Comparable比较器，就意味着它本身支持排序；若它本身没实现Comparable，也可以通过外部比较器Comparator进行排序。
+ * 一个类本身实现了Comparable比较器，就意味着它本身支持排序。
+ * 若它本身没实现Comparable，也可以通过外部比较器Comparator进行排序。
  */
 public interface Comparable<T> {
     /**
@@ -147,8 +147,10 @@ public interface Comparable<T> {
      * @throws ClassCastException   if the specified object's type prevents it from being compared to this object.
      */
     /*
-     * 通过 x.compareTo(y) 来“比较x和y的大小”。
-     * 若返回“负数”，意味着“x比y小”；返回“零”，意味着“x等于y”；返回“正数”，意味着“x大于y”。
+     * 通过 x.compareTo(y) 来“比较x和y的大小”：
+     * 返回“负数”，意味着“x<y”
+     * 返回“零”，意味着“x==y”
+     * 返回“正数”，意味着“x>y”
      */
     int compareTo(T o);
 }
