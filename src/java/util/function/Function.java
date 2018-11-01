@@ -64,6 +64,7 @@ public interface Function<T, R> {
      *
      * @return a function that always returns its input argument
      */
+	// 标识转换
     static <T> Function<T, T> identity() {
         return t -> t;
     }
@@ -84,6 +85,7 @@ public interface Function<T, R> {
      * @throws NullPointerException if before is null
      * @see #andThen(Function)
      */
+	// f1.compose(f2)：先执行f2，再执行f1
     default <V> Function<V, R> compose(Function<? super V, ? extends T> before) {
         Objects.requireNonNull(before);
         return (V v) -> apply(before.apply(v));
@@ -105,6 +107,7 @@ public interface Function<T, R> {
      * @throws NullPointerException if after is null
      * @see #compose(Function)
      */
+	// f1.andThen(f2)：先执行f1，再执行f2
     default <V> Function<T, V> andThen(Function<? super R, ? extends V> after) {
         Objects.requireNonNull(after);
         return (T t) -> after.apply(apply(t));
