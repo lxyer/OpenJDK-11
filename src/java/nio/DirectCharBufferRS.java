@@ -27,7 +27,7 @@ package java.nio;
 
 import sun.nio.ch.DirectBuffer;
 
-// 可读写、直接缓冲区，是DirectCharBufferS的只读版本
+// 只读、直接缓冲区，是DirectCharBufferS的只读版本
 class DirectCharBufferRS extends DirectCharBufferS implements DirectBuffer {
     
     /*▼ 构造方法 ████████████████████████████████████████████████████████████████████████████████┓ */
