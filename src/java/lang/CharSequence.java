@@ -184,7 +184,7 @@ public interface CharSequence {
      *
      * @since 1.8
      */
-    // 将当前char序列转为流序列，序列中每个元素是char的编码值
+    // 将当前char序列转为流序列，序列中每个元素是char
     default IntStream chars() {
         class CharIterator implements PrimitiveIterator.OfInt {
             int cur = 0;
@@ -210,11 +210,7 @@ public interface CharSequence {
         }
         
         return StreamSupport.intStream(
-            () -> Spliterators.spliterator(
-                new CharIterator(),
-                length(),
-                Spliterator.ORDERED
-            ),
+            () -> Spliterators.spliterator(new CharIterator(), length(), Spliterator.ORDERED),
             Spliterator.SUBSIZED | Spliterator.SIZED | Spliterator.ORDERED,
             false
         );
@@ -238,7 +234,7 @@ public interface CharSequence {
      *
      * @since 1.8
      */
-    // 将当前代码点序列转为流序列，该代码点反映一个真实的符号，序列中每个元素是Unicode符号编码值s
+    // 将当前Unicode符号序列转为流序列，序列中每个元素是Unicode符号
     default IntStream codePoints() {
         class CodePointIterator implements PrimitiveIterator.OfInt {
             int cur = 0;
@@ -292,10 +288,7 @@ public interface CharSequence {
         }
         
         return StreamSupport.intStream(
-            () -> Spliterators.spliteratorUnknownSize(
-                new CodePointIterator(),
-                Spliterator.ORDERED
-            ),
+            () -> Spliterators.spliteratorUnknownSize(new CodePointIterator(), Spliterator.ORDERED),
             Spliterator.ORDERED,
             false
         );
