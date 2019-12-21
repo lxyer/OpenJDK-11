@@ -9,7 +9,6 @@ public class BreakIteratorTest02 {
     static String txt1 = "中国、中国、中国；中国：“中国”。中国“中国”中国！中国？中国（中国）中国【中国】中国{中国}中国——中国《中国》中国……中国*中国~中国-中国（。）中国（！）中国（？）中国（（）中国（））中国（、）中国（；）中国 中国 \uD869\uDEA5\u9f98\u9f96\u9f8d";
     static String txt2 = "ChinaChina.ChinaChina. China?China!China/China,China;China:\"China\"China\"China\"China<China>China(China)China[China]China{China}China-China.China&China^China%China+China=China(.)China(?)China(!)China~China";
     static BreakIterator boundary;
-    
     // 分词标准由底层算法决定，分词策略有些迷...
     public static void main(String[] args) {
         System.out.println("\n--------------------中文单词分割--------------------");
