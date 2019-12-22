@@ -320,6 +320,13 @@ public class ArrayList<E> extends AbstractList<E>
         return indexOfRange(o, 0, size);
     }
 
+    /**
+     * contains底层就是使用的for循环,性能不高
+     * @param o
+     * @param start
+     * @param end
+     * @return
+     */
     int indexOfRange(Object o, int start, int end) {
         Object[] es = elementData;
         if (o == null) {
@@ -517,6 +524,7 @@ public class ArrayList<E> extends AbstractList<E>
         modCount++;
         final int s;
         Object[] elementData;
+        //直接赋值并比较,这种写法不错
         if ((s = size) == (elementData = this.elementData).length)
             elementData = grow();
         System.arraycopy(elementData, index,
