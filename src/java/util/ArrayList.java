@@ -238,6 +238,9 @@ public class ArrayList<E> extends AbstractList<E>
                                            newCapacity(minCapacity));
     }
 
+    /**
+     * 长度+1
+     */
     private Object[] grow() {
         return grow(size + 1);
     }
@@ -481,8 +484,9 @@ public class ArrayList<E> extends AbstractList<E>
      * which helps when add(E) is called in a C1-compiled loop.
      */
     private void add(E e, Object[] elementData, int s) {
-        if (s == elementData.length)
+        if (s == elementData.length) {
             elementData = grow();
+        }
         elementData[s] = e;
         size = s + 1;
     }
