@@ -65,7 +65,6 @@ class Stack<E> extends Vector<E> {
      */
     public E push(E item) {
         addElement(item);
-
         return item;
     }
 
