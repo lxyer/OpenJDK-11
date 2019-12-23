@@ -127,6 +127,7 @@ class Stack<E> extends Vector<E> {
      *          indicates that the object is not on the stack.
      */
     public synchronized int search(Object o) {
+        //调用Vector的方法
         int i = lastIndexOf(o);
 
         if (i >= 0) {
