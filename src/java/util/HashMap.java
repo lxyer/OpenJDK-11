@@ -374,6 +374,7 @@ public class HashMap<K,V> extends AbstractMap<K,V>
 
     /**
      * Returns a power of two size for the given target capacity.
+     * 返回比输入数字大的最接近的一个2的n次方的数字
      */
     static final int tableSizeFor(int cap) {
         int n = -1 >>> Integer.numberOfLeadingZeros(cap - 1);
@@ -620,22 +621,29 @@ public class HashMap<K,V> extends AbstractMap<K,V>
     final V putVal(int hash, K key, V value, boolean onlyIfAbsent,
                    boolean evict) {
         Node<K,V>[] tab; Node<K,V> p; int n, i;
+        //判断初始化数组大小,如果为空,做初始化操作
         if ((tab = table) == null || (n = tab.length) == 0)
             n = (tab = resize()).length;
+        //如果通过取余的下标位置没有元素,直接把值添加
         if ((p = tab[i = (n - 1) & hash]) == null)
             tab[i] = newNode(hash, key, value, null);
         else {
+            //tab[i]有值的情况
             Node<K,V> e; K k;
+            //如果hash值相同,判断key是否相同,如果key相同,直接覆盖替换
             if (p.hash == hash &&
                 ((k = p.key) == key || (key != null && key.equals(k))))
                 e = p;
+            //判断是不是树结构
             else if (p instanceof TreeNode)
+                //通过红黑树的方式进行插入
                 e = ((TreeNode<K,V>)p).putTreeVal(this, tab, hash, key, value);
             else {
                 for (int binCount = 0; ; ++binCount) {
                     if ((e = p.next) == null) {
                         p.next = newNode(hash, key, value, null);
                         if (binCount >= TREEIFY_THRESHOLD - 1) // -1 for 1st
+                            //当binCount>8时转换数据结构(链表--->红黑树)提升查询效率
                             treeifyBin(tab, hash);
                         break;
                     }
@@ -645,6 +653,7 @@ public class HashMap<K,V> extends AbstractMap<K,V>
                     p = e;
                 }
             }
+            //判断插入的值当前链表中已经包含,直接break;跳出
             if (e != null) { // existing mapping for key
                 V oldValue = e.value;
                 if (!onlyIfAbsent || oldValue == null)
@@ -653,7 +662,9 @@ public class HashMap<K,V> extends AbstractMap<K,V>
                 return oldValue;
             }
         }
+        //修改次数+1
         ++modCount;
+        //如果数组大小大于阈值
         if (++size > threshold)
             resize();
         afterNodeInsertion(evict);
