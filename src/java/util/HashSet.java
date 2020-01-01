@@ -217,6 +217,7 @@ public class HashSet<E>
      * element
      */
     public boolean add(E e) {
+        //底层使用的HashMap,HashSet的值作为map的key,PRESENT统一作为map的value
         return map.put(e, PRESENT)==null;
     }
 
