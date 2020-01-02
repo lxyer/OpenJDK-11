@@ -271,6 +271,7 @@ public class HashSet<E>
      *             the size of the set (the number of elements it contains)
      *             (int), followed by all of its elements (each an Object) in
      *             no particular order.
+     * 如果重新序列化deserialize,重写writeObject和readObject
      */
     private void writeObject(java.io.ObjectOutputStream s)
         throws java.io.IOException {
