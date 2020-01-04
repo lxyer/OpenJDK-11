@@ -655,6 +655,8 @@ public final class String
      *          object.
      */
     public int length() {
+        //如果是正常的在UTF16范围内的字符,value.length除以1,否则就是除以code值(这个与vm虚拟机相关)
+        //所以如果要获取一个字符串中的字符数量,使用String.length()方法是会有问题的,应该使用string.codePointCount(0,string.length())
         return value.length >> coder();
     }
 
@@ -783,13 +785,16 @@ public final class String
      * @since  1.5
      */
     public int codePointCount(int beginIndex, int endIndex) {
+        //length()的值可能会大于字符串的实际的字符个数
         if (beginIndex < 0 || beginIndex > endIndex ||
             endIndex > length()) {
             throw new IndexOutOfBoundsException();
         }
+        //如果是拉丁字符,直接相减即可
         if (isLatin1()) {
             return endIndex - beginIndex;
         }
+        //对一个字符但是大于1长度的字符进行处理
         return StringUTF16.codePointCount(value, beginIndex, endIndex);
     }
 
