@@ -126,6 +126,7 @@ final class StringUTF16 {
         if (checked && i < endIndex) {
             checkBoundsBeginEnd(i, endIndex, value);
         }
+        //对字符进行处理成1长度
         for (; i < endIndex - 1; ) {
             if (Character.isHighSurrogate(getChar(value, i++)) &&
                 Character.isLowSurrogate(getChar(value, i))) {
