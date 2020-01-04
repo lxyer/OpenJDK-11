@@ -128,6 +128,7 @@ final class StringUTF16 {
         }
         //对字符进行处理成1长度
         for (; i < endIndex - 1; ) {
+            //高代理区（D800–DBFF）和低代理区（DC00–DFFF）
             if (Character.isHighSurrogate(getChar(value, i++)) &&
                 Character.isLowSurrogate(getChar(value, i))) {
                 count--;
