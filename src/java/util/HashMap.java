@@ -425,7 +425,7 @@ public class HashMap<K,V> extends AbstractMap<K,V>
 
     /**
      * The load factor for the hash table.
-     *
+     * 负载因子
      * @serial
      */
     final float loadFactor;
