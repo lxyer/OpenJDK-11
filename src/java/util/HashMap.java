@@ -643,6 +643,7 @@ public class HashMap<K,V> extends AbstractMap<K,V>
             else {
                 for (int binCount = 0; ; ++binCount) {
                     if ((e = p.next) == null) {
+                        //尾插法
                         p.next = newNode(hash, key, value, null);
                         if (binCount >= TREEIFY_THRESHOLD - 1) // -1 for 1st
                             //当binCount>8时转换数据结构(链表--->红黑树)提升查询效率
