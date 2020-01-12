@@ -104,6 +104,7 @@ public class Object {
      * @return  a hash code value for this object.
      * @see     java.lang.Object#equals(java.lang.Object)
      * @see     java.lang.System#identityHashCode
+     * 原生代码,依据对象的内存地址进行hash计算
      */
     @HotSpotIntrinsicCandidate
     public native int hashCode();
