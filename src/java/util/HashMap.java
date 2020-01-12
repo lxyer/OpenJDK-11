@@ -425,7 +425,7 @@ public class HashMap<K,V> extends AbstractMap<K,V>
 
     /**
      * The load factor for the hash table.
-     *
+     * 负载因子
      * @serial
      */
     final float loadFactor;
@@ -626,6 +626,7 @@ public class HashMap<K,V> extends AbstractMap<K,V>
         if ((tab = table) == null || (n = tab.length) == 0)
             n = (tab = resize()).length;
         //如果通过取余的下标位置没有元素,直接把值添加
+        //多线程中,如果两个线程的两个key的hash值相同,当一个key进入到if判断中,但是还没有插入数据,第二个线程也通过if判断,会把第一次的key的value覆盖,因此HashMap是线程不安全的
         if ((p = tab[i = (n - 1) & hash]) == null)
             tab[i] = newNode(hash, key, value, null);
         else {
@@ -642,6 +643,7 @@ public class HashMap<K,V> extends AbstractMap<K,V>
             else {
                 for (int binCount = 0; ; ++binCount) {
                     if ((e = p.next) == null) {
+                        //尾插法
                         p.next = newNode(hash, key, value, null);
                         if (binCount >= TREEIFY_THRESHOLD - 1) // -1 for 1st
                             //当binCount>8时转换数据结构(链表--->红黑树)提升查询效率
@@ -716,6 +718,7 @@ public class HashMap<K,V> extends AbstractMap<K,V>
                 if ((e = oldTab[j]) != null) {
                     oldTab[j] = null;
                     if (e.next == null)
+                        //直接使用扩容前的hash值对新的数组长度进行取余操作,计算新的数组下标(与java 7 不同)
                         newTab[e.hash & (newCap - 1)] = e;
                     else if (e instanceof TreeNode)
                         ((TreeNode<K,V>)e).split(this, newTab, j, oldCap);

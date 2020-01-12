@@ -135,6 +135,8 @@ public final class String
      * Additionally, it is marked with {@link Stable} to trust the contents
      * of the array. No other facility in JDK provides this functionality (yet).
      * {@link Stable} is safe here, because value is never null.
+     *
+     * 使用final关键词修饰,所以string是不可变的值
      */
     @Stable
     private final byte[] value;
