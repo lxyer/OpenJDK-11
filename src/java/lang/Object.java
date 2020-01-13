@@ -104,6 +104,7 @@ public class Object {
      * @return  a hash code value for this object.
      * @see     java.lang.Object#equals(java.lang.Object)
      * @see     java.lang.System#identityHashCode
+     * 原生代码,依据对象的内存地址进行hash计算
      */
     @HotSpotIntrinsicCandidate
     public native int hashCode();
@@ -241,6 +242,7 @@ public class Object {
      * </pre></blockquote>
      *
      * @return  a string representation of the object.
+     * toString()方法也要重写,为了性能,不要使用IDE自动生成的使用String拼接的方式,还是使用stringbuffer进行拼接
      */
     public String toString() {
         return getClass().getName() + "@" + Integer.toHexString(hashCode());
