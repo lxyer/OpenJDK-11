@@ -520,6 +520,11 @@ public class ThreadPoolExecutor extends AbstractExecutorService {
      * Threads use this timeout when there are more than corePoolSize
      * present or if allowCoreThreadTimeOut. Otherwise they wait
      * forever for new work.
+     * keepAliveTime 表示线程池中的线程空闲时间
+     * 当空闲时间达到keepAliveTime时,线程会被销毁,直到只剩下corePoolSize个线程;
+     * 避免浪费内存和句柄资源.
+     * 在默认情况下,当线程池的线程数大于corePoolSize时,keepAliveTime才起作用.
+     * 但是当ThreadPoolExecutor的allowCoreThreadTimeOut = true时,核心线程超时后也会被回收.
      */
     private volatile long keepAliveTime;
 
@@ -537,6 +542,13 @@ public class ThreadPoolExecutor extends AbstractExecutorService {
      *
      * Since the worker count is actually stored in COUNT_BITS bits,
      * the effective limit is {@code corePoolSize & COUNT_MASK}.
+     * 核心线程
+     * corePoolSize 表示常驻核心线程数
+     * 如果等于0,则任务执行完之后,没有任何请求进入时销毁线程池的线程;
+     * 如果大于0,即使本地任务执行完毕,核心线程也不会被销毁.
+     * 这个值的设置非常关键;
+     * 设置过大会浪费资源;
+     * 设置过小会导致线程频繁地创建或销毁.
      */
     private volatile int corePoolSize;
 
@@ -545,6 +557,11 @@ public class ThreadPoolExecutor extends AbstractExecutorService {
      *
      * Since the worker count is actually stored in COUNT_BITS bits,
      * the effective limit is {@code maximumPoolSize & COUNT_MASK}.
+     * 最大线程数量
+     * maximumPoolSize 表示线程池能够容纳同时执行的最大线程数
+     * 从第1处来看,必须>=1.
+     * 如果待执行的线程数大于此值,需要借助第5个参数的帮助,缓存在队列中.
+     * 如果maximumPoolSize = corePoolSize,即是固定大小线程池.
      */
     private volatile int maximumPoolSize;
 
@@ -1316,6 +1333,7 @@ public class ThreadPoolExecutor extends AbstractExecutorService {
      * @throws NullPointerException if {@code command} is null
      */
     public void execute(Runnable command) {
+        //如果添加指令为空,报空指针异常
         if (command == null)
             throw new NullPointerException();
         /*
@@ -1339,11 +1357,13 @@ public class ThreadPoolExecutor extends AbstractExecutorService {
          * and so reject the task.
          */
         int c = ctl.get();
+        //当线程数小于核心线程数量时,调用addWorker创建线程
         if (workerCountOf(c) < corePoolSize) {
             if (addWorker(command, true))
                 return;
             c = ctl.get();
         }
+        //如果当前有效线程大于等于核心线程数，并且当前线程池状态为运行状态，则将任务添加到阻塞队列中，等待空闲线程取出队列执行
         if (isRunning(c) && workQueue.offer(command)) {
             int recheck = ctl.get();
             if (! isRunning(recheck) && remove(command))
@@ -1351,7 +1371,9 @@ public class ThreadPoolExecutor extends AbstractExecutorService {
             else if (workerCountOf(recheck) == 0)
                 addWorker(null, false);
         }
+        //如果阻塞队列已满，则调用addWorker执行任务（即创建一条线程执行该任务）
         else if (!addWorker(command, false))
+            // 如果创建线程失败，则调用线程拒绝策略
             reject(command);
     }
 
