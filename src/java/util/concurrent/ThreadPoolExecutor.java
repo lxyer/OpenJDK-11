@@ -1064,7 +1064,6 @@ public class ThreadPoolExecutor extends AbstractExecutorService {
                     return null;
                 continue;
             }
-
             try {
                 Runnable r = timed ?
                     workQueue.poll(keepAliveTime, TimeUnit.NANOSECONDS) :
