@@ -279,6 +279,7 @@ public class Object {
      *               the owner of this object's monitor.
      * @see        java.lang.Object#notifyAll()
      * @see        java.lang.Object#wait()
+     * 为线程提供的方法
      */
     @HotSpotIntrinsicCandidate
     public final native void notify();
