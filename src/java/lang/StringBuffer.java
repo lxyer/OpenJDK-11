@@ -291,6 +291,7 @@ import jdk.internal.HotSpotIntrinsicCandidate;
     /**
      * @throws IndexOutOfBoundsException {@inheritDoc}
      * @see        #length()
+     *
      */
     @Override
     public synchronized void setCharAt(int index, char ch) {
@@ -298,6 +299,12 @@ import jdk.internal.HotSpotIntrinsicCandidate;
         super.setCharAt(index, ch);
     }
 
+    /**
+     * 使用synchronized关键字对append方法进行修饰,线程安全
+     * append之后对toStringCache进行置空
+     * @param   obj   an {@code Object}.
+     * @return
+     */
     @Override
     public synchronized StringBuffer append(Object obj) {
         toStringCache = null;
