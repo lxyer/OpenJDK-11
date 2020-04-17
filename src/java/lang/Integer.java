@@ -1051,6 +1051,7 @@ public final class Integer extends Number implements Comparable<Integer> {
     @HotSpotIntrinsicCandidate
     public static Integer valueOf(int i) {
         if (i >= IntegerCache.low && i <= IntegerCache.high)
+            //在-128到127之间,直接使用IntegerCache中的值,可以直接比较相同,但是超过这个范围就是重新创建一个Integer对象,进行equals比较就不相同了
             return IntegerCache.cache[i + (-IntegerCache.low)];
         return new Integer(i);
     }
