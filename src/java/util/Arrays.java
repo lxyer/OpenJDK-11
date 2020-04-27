@@ -8771,7 +8771,7 @@ public class Arrays {
     /**
      * @serial include
      */
-    // 内部实现的固定长度的ArrayList，不能改变元素数量
+    // 内部实现的固定长度的ArrayList,不能改变元素数量,不能使用add,remove得对元素进行操作
     private static class ArrayList<E> extends AbstractList<E> implements RandomAccess, Serializable {
         private static final long serialVersionUID = -2764017481108945198L;
         private final E[] a;
