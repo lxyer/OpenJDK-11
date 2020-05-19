@@ -218,6 +218,8 @@ public class Object {
      *               throw this exception to indicate that an instance cannot
      *               be cloned.
      * @see java.lang.Cloneable
+     * protected 修饰,只能是lang包下的对象才可以调用clone方法,其他的对象即使都是object的子类
+     * 但是对clone方法是不可见的
      */
     @HotSpotIntrinsicCandidate
     protected native Object clone() throws CloneNotSupportedException;
