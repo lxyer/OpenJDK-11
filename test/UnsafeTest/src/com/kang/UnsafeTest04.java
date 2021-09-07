@@ -4,6 +4,7 @@ import sun.misc.Unsafe;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
+import java.util.LinkedList;
 
 // 利用Unsafe#objectFieldOffse方法获取某个对象的近似大小
 public class UnsafeTest04 {
@@ -26,5 +27,10 @@ public class UnsafeTest04 {
         } while((clazz = clazz.getSuperclass()) != null);
         
         return maxOffset + 8;   // 字段占用内存的最大值为long或者double：8个字节
+    }
+
+    public void testList(){
+        LinkedList list = new LinkedList();
+        list.getFirst();
     }
 }

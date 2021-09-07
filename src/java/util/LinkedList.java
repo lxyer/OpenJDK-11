@@ -87,11 +87,13 @@ public class LinkedList<E>
     transient int size = 0;
 
     /**
+     * 这个就可以快速的获取第一个，这个效率要比ArrayList的效率要高
      * Pointer to first node.
      */
     transient Node<E> first;
 
     /**
+     * 这个就可以快速的获取最后一个，这个效率要比ArrayList的效率要高
      * Pointer to last node.
      */
     transient Node<E> last;
