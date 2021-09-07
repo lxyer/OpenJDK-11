@@ -259,6 +259,7 @@ public class HashMap<K,V> extends AbstractMap<K,V>
     static final int TREEIFY_THRESHOLD = 8;
 
     /**
+     * 从红黑树退化成链表的临界值
      * The bin count threshold for untreeifying a (split) bin during a
      * resize operation. Should be less than TREEIFY_THRESHOLD, and at
      * most 6 to mesh with shrinkage detection under removal.
@@ -628,6 +629,7 @@ public class HashMap<K,V> extends AbstractMap<K,V>
         //如果通过取余的下标位置没有元素,直接把值添加
         //多线程中,如果两个线程的两个key的hash值相同,当一个key进入到if判断中,但是还没有插入数据,第二个线程也通过if判断,会把第一次的key的value覆盖,因此HashMap是线程不安全的
         if ((p = tab[i = (n - 1) & hash]) == null)
+            //增加节点
             tab[i] = newNode(hash, key, value, null);
         else {
             //tab[i]有值的情况
@@ -2226,6 +2228,7 @@ public class HashMap<K,V> extends AbstractMap<K,V>
 
             if (loHead != null) {
                 if (lc <= UNTREEIFY_THRESHOLD)
+                    //从红黑树退化回链表
                     tab[index] = loHead.untreeify(map);
                 else {
                     tab[index] = loHead;
