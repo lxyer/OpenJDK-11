@@ -30,6 +30,9 @@ public class UnsafeTest04 {
     }
 
     public void testList(){
+        synchronized(this){
+            //doSomething
+        }
         LinkedList list = new LinkedList();
         list.getFirst();
     }

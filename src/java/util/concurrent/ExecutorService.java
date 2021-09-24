@@ -276,7 +276,7 @@ public interface ExecutorService extends Executor {
      *
      * @param tasks the collection of tasks
      * @param <T> the type of the values returned from the tasks
-     * @return a list of Futures representing the tasks, in the same
+     * @return a list of Futures representing the tasks, inx the same
      *         sequential order as produced by the iterator for the
      *         given task list, each of which has completed
      * @throws InterruptedException if interrupted while waiting, in
